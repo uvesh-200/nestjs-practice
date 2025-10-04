@@ -7,9 +7,13 @@ import { StudentService } from './student/student.service';
 import { CustomerController } from './customer/customer.controller';
 import { CustomerService } from './customer/customer.service';
 import { CustomerModule } from './customer/customer.module';
+import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-  imports: [StudentModule, CustomerModule],
+  imports: [StudentModule, CustomerModule, ConfigModule.forRoot({
+    isGlobal: true,
+  }), MongooseModule.forRoot(process.env.MONGO_URI!)],
   controllers: [AppController, StudentController, CustomerController],
   providers: [AppService, StudentService, CustomerService],
 })

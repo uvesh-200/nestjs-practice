@@ -10,4 +10,12 @@ export class UserService {
     async createUser(data: Partial<User>): Promise<User> {
         return new this.userModel(data).save();
     }
+
+    async findAll(): Promise<User[]> {
+        return this.userModel.find().exec();
+    }
+
+    async findById(id: string): Promise<User | null> {
+        return this.userModel.findById(id).exec();
+    }
 }
